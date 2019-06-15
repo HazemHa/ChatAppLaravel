@@ -1,0 +1,123 @@
+version: '2'
+services:
+    nginx:
+        image: nginx:mainline-alpine
+        ports:
+            - 8080:80
+        volumes:
+            - ./www:/var/www
+            - ./nginx/conf.d/default.conf:/etc/nginx/conf.d/default.conf
+            - ./logs/nginx:/var/log/nginx
+        links: 
+            - php7fpm 
+        depends_on: 
+            - php7fpm
+            - mysql
+    artisan:
+        image: wiwatsrt/docker-laravel-artisan
+        volumes:
+            - ./www:/var/www
+        links: 
+            - mysql
+        depends_on: 
+            - mysql
+    composer:  
+        image: wiwatsrt/docker-laravel-composer
+        volumes:
+            - ./www:/var/www
+    php7fpm:
+        image: wiwatsrt/docker-laravel-php7fpm
+        volumes:
+            - ./www:/var/www
+        links:
+            - mysql
+        depends_on: 
+            - mysql
+    mysql:
+        image: mysql:5.7
+        volumes:
+            - db_data:/var/lib/mysql
+            - ./logs/mysql:/var/log/mysql
+        environment: 
+            - MYSQL_ROOT_PASSWORD=rootsecret
+            - MYSQL_DATABASE=laravelecommerce_1
+            - MYSQL_USER=root
+            - MYSQL_PASSWORD=
+    nodejs:  
+        image: wiwatsrt/docker-laravel-nodejs
+        volumes:
+            - ./www:/var/www
+volumes:
+    db_data:
+version: '2'
+services:
+    nginx:
+        image: nginx:mainline-alpine
+        ports:
+            - 8080:80
+        volumes:
+            - ./www:/var/www
+            - ./nginx/conf.d/default.conf:/etc/nginx/conf.d/default.conf
+            - ./logs/nginx:/var/log/nginx
+        links: 
+            - php7fpm 
+            - mysql
+            - redis
+            - laravelechoserver
+        depends_on: 
+            - php7fpm
+            - mysql
+            - redis
+            - laravelechoserver
+    artisan:
+        image: wiwatsrt/docker-laravel-artisan
+        volumes:
+            - ./www:/var/www
+        links: 
+            - mysql
+        depends_on: 
+            - mysql
+    composer:  
+        image: wiwatsrt/docker-laravel-composer
+        volumes:
+            - ./www:/var/www
+    php7fpm:
+        image: wiwatsrt/docker-laravel-php7fpm
+        volumes:
+            - ./www:/var/www
+        links:
+            - mysql
+        depends_on: 
+            - mysql
+    mysql:
+        image: mysql:5.7
+        volumes:
+            - db_data:/var/lib/mysql
+            - ./logs/mysql:/var/log/mysql
+        environment: 
+            - MYSQL_ROOT_PASSWORD=rootsecret
+            - MYSQL_DATABASE=laravelecommerce_1
+            - MYSQL_USER=root
+            - MYSQL_PASSWORD=
+    nodejs:  
+        image: wiwatsrt/docker-laravel-nodejs
+        volumes:
+            - ./www:/var/www
+
+    redis:
+        image: redis:alpine
+        volumes:
+            - ./www:/var/www
+
+    laravelechoserver:
+        image: hazemha/laravel-echo-server-docker:latest
+        volumes:
+            - ./www:/var/www
+            - ./laravelEchoServer/laravel-echo-server.json:/var/www/laravel-echo-server.json
+        links:
+            - redis
+        depends_on: 
+            - redis
+            
+volumes:
+    db_data:
