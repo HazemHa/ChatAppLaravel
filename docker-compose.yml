@@ -96,7 +96,7 @@ services:
             - ./logs/mysql:/var/log/mysql
         environment: 
             - MYSQL_ROOT_PASSWORD=rootsecret
-            - MYSQL_DATABASE=laravelecommerce_1
+            - MYSQL_DATABASE=chat_db
             - MYSQL_USER=root
             - MYSQL_PASSWORD=
     nodejs:  
