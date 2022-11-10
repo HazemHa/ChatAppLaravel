@@ -22,8 +22,8 @@
     "dependencies": {
         "css-loader": "^1.0.1",
         "laravel-echo": "^1.4.1",
-        "socket.io": "^2.1.1",
-        "socket.io-client": "^2.1.1",
+        "socket.io": "^2.5.0",
+        "socket.io-client": "^2.5.0",
         "v-toaster": "^1.0.3",
         "vee-validate": "^2.1.2",
         "vue-balloon": "^1.0.20",
