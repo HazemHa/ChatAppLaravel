@@ -14,13 +14,13 @@
         "bootstrap": "^4.0.0",
         "cross-env": "^5.1",
         "jquery": "^3.2",
-        "laravel-mix": "^2.0",
+        "laravel-mix": "^6.0",
         "lodash": "^4.17.5",
         "popper.js": "^1.12",
         "vue": "^2.5.7"
     },
     "dependencies": {
-        "css-loader": "^1.0.1",
+        "css-loader": "^6.7.3",
         "laravel-echo": "^1.4.1",
         "socket.io": "^2.1.1",
         "socket.io-client": "^2.1.1",
